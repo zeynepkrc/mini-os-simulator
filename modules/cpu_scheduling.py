@@ -1,3 +1,4 @@
+import random
 from collections import deque
 
 
@@ -9,6 +10,18 @@ def create_sample_processes():
         {"pid": "P4", "arrival": 3, "burst": 5},
     ]
 
+def create_random_processes():
+    process_count = random.randint(4,6)
+    processes = []
+    for i in range(1, process_count + 1):
+        process = {
+            "pid": f"P{i}",
+            "arrival": random.randint(0, 5),
+            "burst": random.randint(2, 10),
+        }
+        processes.append(process)
+    
+    return processes    
 
 def print_processes(processes):
     print("\nProcesses")
@@ -102,9 +115,9 @@ def fcfs(processes):
 
 
 def round_robin(processes, quantum):
-    sorted_processes = sorted(processes, key=lambda p: p["arrival"])
+    sorted_processes = sorted(processes, key=lambda p: p["arrival"])    
 
-    ready_queue = deque()
+    ready_queue = deque()   
     remaining_time = {}
     completion_time = {}
     gantt_chart = []
@@ -158,7 +171,7 @@ def round_robin(processes, quantum):
             "turnaround": turnaround_time,
         }
 
-    return gantt_chart, metrics
+    return gantt_chart, metrics 
 
 
 def mlfq(processes):
@@ -261,24 +274,39 @@ def compare_algorithms(results):
 
 
 def run_cpu_scheduling():
-    processes = create_sample_processes()
+    while True: 
+        print("\n--- CPU Scheduling Module ---")
+        print("1. Run fixed demo")
+        print("2. Run random simulation")
+        print("0. Back to main menu")
 
-    print("\n--- CPU Scheduling Module ---")
-    print_processes(processes)
+        choice = input("Select an option: ")
 
-    fcfs_gantt, fcfs_metrics = fcfs(processes)
-    fcfs_result = print_result("FCFS", processes, fcfs_gantt, fcfs_metrics)
+        if choice == "1":
+            processes = create_sample_processes()
+        elif choice == "2": 
+            processes = create_random_processes()   
+        elif choice == "0":
+            break
+        else:            
+            print("Invalid option.")
+            continue
 
-    rr_gantt, rr_metrics = round_robin(processes, quantum=2)
-    rr_result = print_result("Round Robin", processes, rr_gantt, rr_metrics)
+        print_processes(processes)  
 
-    mlfq_gantt, mlfq_metrics = mlfq(processes)
-    mlfq_result = print_result("MLFQ", processes, mlfq_gantt, mlfq_metrics)
+        fcfs_gantt, fcfs_metrics = fcfs(processes)
+        fcfs_result = print_result("FCFS", processes, fcfs_gantt, fcfs_metrics)
 
-    results = {
-        "FCFS": fcfs_result,
-        "Round Robin": rr_result,
-        "MLFQ": mlfq_result,
-    }
+        rr_gantt, rr_metrics = round_robin(processes, quantum=2)
+        rr_result = print_result("Round Robin (Quantum=2)", processes, rr_gantt, rr_metrics)
 
-    compare_algorithms(results)
+        mlfq_gantt, mlfq_metrics = mlfq(processes)
+        mlfq_result = print_result("MLFQ", processes, mlfq_gantt, mlfq_metrics)
+
+        results = {
+            "FCFS": fcfs_result,
+            "Round Robin": rr_result,
+            "MLFQ": mlfq_result,
+        }
+
+        compare_algorithms(results)

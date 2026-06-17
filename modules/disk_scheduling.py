@@ -1,3 +1,5 @@
+import random
+
 def calculate_movement(from_position, to_position):
     return abs(to_position - from_position)
 
@@ -89,6 +91,26 @@ def run_demo():
 
     compare_algorithms(fcfs_result, sstf_result)
 
+def run_random_simulation():
+    request_count = random.randint(6, 10)
+    max_cylinder = 199
+
+    requests = [
+        random.randint(0, max_cylinder)
+        for _ in range(request_count)
+    ]
+
+    initial_head = random.randint(0, max_cylinder)
+
+    print("\n--- Random Disk Scheduling Simulation ---")
+    print(f"Initial Head Position: {initial_head}")
+    print(f"Disk Requests: {requests}")
+
+    fcfs_result = fcfs_disk_scheduling(requests, initial_head)
+    sstf_result = sstf_disk_scheduling(requests, initial_head)
+
+    compare_algorithms(fcfs_result, sstf_result)
+
 
 def run_custom_simulation():
     try:
@@ -124,6 +146,7 @@ def run_disk_scheduling():
         print("\n--- Disk Scheduling Module ---")
         print("1. Run demo")
         print("2. Enter custom disk requests")
+        print("3. Run random simulation")
         print("0. Back to main menu")
 
         choice = input("Select an option: ")
@@ -132,6 +155,8 @@ def run_disk_scheduling():
             run_demo()
         elif choice == "2":
             run_custom_simulation()
+        elif choice == "3":
+            run_random_simulation()
         elif choice == "0":
             break
         else:

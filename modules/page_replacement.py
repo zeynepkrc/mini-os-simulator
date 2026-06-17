@@ -1,3 +1,4 @@
+import random
 from collections import deque
 
 
@@ -123,6 +124,25 @@ def run_demo():
 
     compare_algorithms(fifo_result, lru_result)
 
+def run_random_simulation():
+    reference_lenght = random.randint(10, 15)
+    max_page_lenght = random.randint(5, 8)
+    frame_count = random.randint(3, 4)
+        
+    reference_string = [
+        random.randint(1, max_page_lenght)
+        for _ in range(reference_lenght)
+    ]
+
+    print("\n--- Random Page Replacement Simulation ---")
+    print(f"Reference String: {reference_string}")
+    print(f"Frame Count: {frame_count}")
+
+    fifo_result = fifo_page_replacement(reference_string, frame_count)
+    lru_result = lru_page_replacement(reference_string, frame_count)
+
+    compare_algorithms(fifo_result, lru_result)
+
 
 def run_custom_simulation():
     try:
@@ -153,6 +173,7 @@ def run_page_replacement():
         print("\n--- Page Replacement Module ---")
         print("1. Run demo")
         print("2. Enter custom reference string")
+        print("3. Run random simulation")
         print("0. Back to main menu")
 
         choice = input("Select an option: ")
@@ -161,6 +182,8 @@ def run_page_replacement():
             run_demo()
         elif choice == "2":
             run_custom_simulation()
+        elif choice == "3":
+            run_random_simulation()
         elif choice == "0":
             break
         else:
