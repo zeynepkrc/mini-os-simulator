@@ -20,8 +20,20 @@ def create_random_processes():
             "burst": random.randint(2, 10),
         }
         processes.append(process)
-    
-    return processes    
+ 
+    return processes
+
+def create_custom_processes():
+    processes = []
+    process_count = int(input("Enter the number of processes: "))
+
+    for i in range(1, process_count + 1):
+        pid = f"P{i}"
+        arrival = int(input(f"Enter arrival time for {pid}: "))
+        burst = int(input(f"Enter burst time for {pid}: "))
+        processes.append({"pid": pid, "arrival": arrival, "burst": burst})
+
+    return processes
 
 def print_processes(processes):
     print("\nProcesses")
@@ -278,6 +290,7 @@ def run_cpu_scheduling():
         print("\n--- CPU Scheduling Module ---")
         print("1. Run fixed demo")
         print("2. Run random simulation")
+        print("3. Create custom processes")
         print("0. Back to main menu")
 
         choice = input("Select an option: ")
@@ -285,7 +298,9 @@ def run_cpu_scheduling():
         if choice == "1":
             processes = create_sample_processes()
         elif choice == "2": 
-            processes = create_random_processes()   
+            processes = create_random_processes()
+        elif choice == "3":
+            processes = create_custom_processes()
         elif choice == "0":
             break
         else:            
