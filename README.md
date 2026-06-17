@@ -9,6 +9,7 @@ The simulator includes process management, CPU scheduling, memory management, co
 
 The purpose of this project is to show how core operating system concepts work through small and understandable simulations.
 Each module focuses on a different topic and prints the simulation steps and results to the terminal.
+Some modules also include random simulation options. These options generate random but limited input values, allowing the simulator to demonstrate different cases without manually entering data each time.
 
 ## Implemented Modules
 
@@ -60,6 +61,7 @@ Each module focuses on a different topic and prints the simulation steps and res
 * FIFO page replacement
 * LRU page replacement
 * Page fault rate comparison
+* Random page reference string generation
 
 ### Module 8 — Concurrency
 
@@ -89,6 +91,7 @@ Each module focuses on a different topic and prints the simulation steps and res
 * FCFS disk scheduling
 * SSTF disk scheduling
 * Total head movement calculation
+* Random disk request generation
 
 ### Module 13 — RAID
 
@@ -197,6 +200,17 @@ The simulator will display:
 * Gantt charts
 * Waiting and turnaround times
 * Algorithm comparison
+
+Some modules provide three execution options:
+
+```text
+1. Run fixed demo
+2. Enter custom values
+3. Run random simulation
+
+The fixed demo uses predefined values for clear explanation.
+The custom option allows the user to enter input manually.
+The random simulation option generates values within safe limits to show different possible outputs.
 
 ## Notes
 
