@@ -268,7 +268,8 @@ def mlfq(processes):
 
 def compare_algorithms(results):
     print("\n===== Algorithm Comparison =====")
-    print("Algorithm\tAverage Waiting\tAverage Turnaround")
+    print(f"{'Algorithm':<15}{'Average Waiting':<20}{'Average Turnaround':<20}")
+    print("-" * 55)
 
     best_algorithm = None
     best_waiting_time = None
@@ -276,7 +277,7 @@ def compare_algorithms(results):
     for algorithm_name, result in results.items():
         average_waiting, average_turnaround = result
 
-        print(f"{algorithm_name}\t\t{average_waiting:.2f}\t\t{average_turnaround:.2f}")
+        print(f"{algorithm_name:<15}{average_waiting:<20.2f}{average_turnaround:<20.2f}")
 
         if best_waiting_time is None or average_waiting < best_waiting_time:
             best_waiting_time = average_waiting
